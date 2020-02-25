@@ -30,16 +30,16 @@ def index():
         if operacao is not None:
             if 'encher_b1' == operacao:                
                 b1.encher()
-                estados.append('Encheu Balde 1')
+                estados.append('Encheu o Balde 1')
             elif 'encher_b2' == operacao:
                 b2.encher()
-                estados.append('Encheu Balde 2')
+                estados.append('Encheu o Balde 2')
             elif 'esvaziar_b1' == operacao:
                 b1.esvaziar()
-                estados.append('Esvaziou Balde 1')
+                estados.append('Esvaziou o Balde 1')
             elif 'esvaziar_b2' == operacao:
                 b2.esvaziar()
-                estados.append('Esvaziou Balde 2')
+                estados.append('Esvaziou o Balde 2')
             elif 'b1_to_b2' == operacao:
                 try:
                     b2.receber_conteudo(b1)
@@ -64,7 +64,7 @@ def index():
     }  
     
     if b1.quantidade == 2.0:
-        flash('Objetivo alcançado com sucesso, o balde 1 contém 2 litros.')
+        flash('Objetivo alcançado com sucesso! o balde 1 contém 2 litros.')
 
     return render_template('index.html', baldes=baldes)
 
