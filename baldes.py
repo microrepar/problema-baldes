@@ -27,7 +27,7 @@ class Balde:
     if espaco == 0.0:
       raise Exception(f'O balde já está com a capacidade máxima de {self._quantidade} litros')
     if outro.quantidade == espaco:
-      self._quantidade = outro.quantidade
+      self._quantidade += outro.quantidade
       outro.esvaziar()
     elif outro.quantidade > espaco:
       self.encher()

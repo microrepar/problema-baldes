@@ -18,11 +18,28 @@
 <body>
   <div class="container-fluid my-5">
     <nav class="navbar fixed-top navbar-dark bg-primary">
-      <a class="navbar-brand" href="#!">PROBLEMA DOS BALDES</a>
+      <a class="navbar-brand" href="{{ url_for("index") }}">PROBLEMA DOS BALDES</a>
     </nav>
   </div>
 
   <div class="container pt-5">
+    <div class="row">
+      <div class="col">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{% if 'sucesso' in message %}success{% else %}danger{% endif %}
+         danger alert-dismissible fade show" role="alert">
+          <strong>{{ message }}.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
+    </div>
     <form action="" method="post">      
       <div class="row d-flex align-items-center">        
         <div class="col mb-3">
@@ -70,7 +87,7 @@
             </div>
           </div>
         </div>
-        <div class="col">
+        <div class="col-6">
           <div class="row my-1">
             <div class="col">
               {% if balde1.quantidade != 0 %}
@@ -92,24 +109,6 @@
               <button type="button" name="operacao" id="b2_to_b1" class="btn btn-secondary btn-lg btn-block" value="b2_to_b1">BALDE1 
                 <span class="font-weight-bold"> << </span> BALDE2 </button>
               {% endif %}              
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              {% with messages = get_flashed_messages() %}
-              {% if messages %}
-              
-                {% for message in messages %}
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong>{{ message }}.
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                {% endfor %}
-              
-              {% endif %}
-              {% endwith %}
             </div>
           </div>
         </div>

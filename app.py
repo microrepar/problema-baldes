@@ -62,7 +62,10 @@ def index():
         'b1': b1,
         'b2': b2,
     }  
-        
+    
+    if b1.quantidade == 2.0:
+        flash('Objetivo alcançado com sucesso, o balde 1 contém 2 litros.')
+
     return render_template('index.html', baldes=baldes)
 
 
