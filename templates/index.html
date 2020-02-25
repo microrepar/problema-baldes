@@ -21,169 +21,170 @@
       <a class="navbar-brand" href="{{ url_for("index") }}">PROBLEMA DOS BALDES</a>
     </nav>
   </div>
-
-  <div class="container pt-5">
-    <div class="row">
-      <div class="col">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-{% if 'sucesso' in message %}success{% else %}danger{% endif %}
-         danger alert-dismissible fade show" role="alert">
-          <strong>{{ message }}.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
-      </div>
-    </div>
-    <form action="" method="post">      
-      <div class="row d-flex align-items-center">        
-        <div class="col mb-3">
-          <div class="card">
-            {% if balde1.quantidade == 1 %}
-            <img src="{{ url_for('static', filename='img/balde_4_1.jpg') }}" class="card-img-top"
-              alt="Balde de 3 litros">
-            {% elif balde1.quantidade == 2 %}
-            <img src="{{ url_for('static', filename='img/balde_4_2.jpg') }}" class="card-img-top"
-              alt="Balde de 3 litros">
-            {% elif balde1.quantidade == 3 %}
-            <img src="{{ url_for('static', filename='img/balde_4_3.jpg') }}" class="card-img-top"
-              alt="Balde de 3 litros">
-            {% elif balde1.quantidade == 4 %}
-            <img src="{{ url_for('static', filename='img/balde_4_4.jpg') }}" class="card-img-top"
-              alt="Balde de 3 litros">
-            {% else %}
-            <img src="{{ url_for('static', filename='img/balde_4_0.jpg') }}" class="card-img-top"
-              alt="Balde de 3 litros">
-            {% endif %} 
-            
-            <div class="card-body">
-              <h5 class="card-title">Balde 1</h5>
-              <p class="card-text">Capacidade: {{ balde1.capacidade }} litros</p>
-              <p class="card-text">Conteudo: <span class="font-weight-bold">{{ balde1.quantidade }} litros</span></p>
-              <input hidden type="text" name="b1_capacidade" id="b1_capacidade" value="{{ balde1.capacidade }}">
-              <input hidden type="text" name="b1_quantidade" id="b1_quantidade" value="{{ balde1.quantidade }}">
-              <div class="row">
-                <div class="col">
-                  {% if balde1.quantidade < balde1.capacidade %}
-                    <button type="submit" name="operacao" id="encher_b1" class="btn btn-primary btn-block"  value="encher_b1">ENCHER</button>
-                  {% else %}
-                    <button type="button" name="operacao" id="encher_b1" class="btn btn-secondary btn-block"  value="encher_b1">ENCHER</button>
-                  {% endif %}                  
-                </div>
-                <div class="col">
-                  {% if balde1.quantidade > 0 %}
-                    <button type="submit" name="operacao" id="esvaziar_b1" class="btn btn-primary btn-block" value="esvaziar_b1">ESVAZIAR</button>
-                  {% else %}
-                    <button type="button" name="operacao" id="esvaziar_b1" class="btn btn-secondary btn-block" value="esvaziar_b1">ESVAZIAR</button>
-                  {% endif %}
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="row my-1">
-            <div class="col">
-              {% if balde1.quantidade != 0 %}
-                <button type="submit" name="operacao" id="b1_to_b2" class="btn btn-primary btn-lg btn-block" value="b1_to_b2">BALDE1
-                  <span class="font-weight-bold">>></span> BALDE2</button>
-              {% else %}
-                <button type="button" name="operacao" id="b1_to_b2" class="btn btn-secondary btn-lg btn-block" value="b1_to_b2">BALDE1
-                  <span class="font-weight-bold">>></span> BALDE2</button>
-              {% endif %}
-              
-            </div>
-          </div>
-          <div class="row my-1">
-            <div class="col">
-              {% if balde2.quantidade != 0 %}
-              <button type="submit" name="operacao" id="b2_to_b1" class="btn btn-primary btn-lg btn-block" value="b2_to_b1">BALDE1 
-                <span class="font-weight-bold"> << </span> BALDE2 </button>
-              {% else %}
-              <button type="button" name="operacao" id="b2_to_b1" class="btn btn-secondary btn-lg btn-block" value="b2_to_b1">BALDE1 
-                <span class="font-weight-bold"> << </span> BALDE2 </button>
-              {% endif %}              
-            </div>
-          </div>
-        </div>
-        <div class="col mb-3">
-          <div class="card">
-            {% if balde2.quantidade == 1 %}
-            <img src="{{ url_for('static', filename='img/balde_4_1.jpg') }}" class="card-img-top"
-              alt="Balde de 3 litros">
-            {% elif balde2.quantidade == 2 %}
-            <img src="{{ url_for('static', filename='img/balde_4_2.jpg') }}" class="card-img-top"
-              alt="Balde de 3 litros">
-            {% elif balde2.quantidade == 3 %}
-            <img src="{{ url_for('static', filename='img/balde_4_3.jpg') }}" class="card-img-top"
-              alt="Balde de 3 litros">
-            {% else %}
-            <img src="{{ url_for('static', filename='img/balde_4_0.jpg') }}" class="card-img-top"
-              alt="Balde de 3 litros">
-            {% endif %}
-            <div class="card-body">
-              <h5 class="card-title">Balde 2</h5>
-              <p class="card-text">Capacidade: {{ balde2.capacidade }} litros</p>
-              <p class="card-text">Conteudo: <span class="font-weight-bold">{{ balde2.quantidade }} litros</span></p>
-              <input hidden type="text" name="b2_capacidade" id="b2_capacidade" value="{{ balde2.capacidade }}">
-              <input hidden type="text" name="b2_quantidade" id="b2_quantidade" value="{{ balde2.quantidade }}">
-              <div class="row">
-                <div class="col">
-                  {% if balde2.quantidade < balde2.capacidade %}
-                    <button type="submit" name="operacao" id="encher_b2" class="btn btn-primary btn-block" value="encher_b2">ENCHER</button>
-                  {% else %}
-                    <button type="button" name="operacao" id="encher_b2" class="btn btn-secondary btn-block" value="encher_b2">ENCHER</button>
-                  {% endif %}
-                </div>
-                <div class="col">
-                  {% if balde2.quantidade > 0 %}
-                    <button type="submit" name="operacao" id="esvaziar_b2" class="btn btn-primary btn-block" value="esvaziar_b2">ESVAZIAR</button>
-                  {% else %}
-                    <button type="button" name="operacao" id="esvaziar_b2" class="btn btn-secondary btn-block" value="esvaziar_b2">ESVAZIAR</button>
-                  {% endif %}
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div style="width:1600px">
+    <div class="container pt-5">
       <div class="row">
         <div class="col">
-          <button type="submit" name="operacao" id="reset" class="btn btn-primary btn-lg btn-block" value="reset">RESET</button>
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{% if 'sucesso' in message %}success{% else %}danger{% endif %}
+          danger alert-dismissible fade show" role="alert">
+            <strong>{{ message }}.
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
         </div>
       </div>
-    </form>
-    <div class="row">
-      <div class="col">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Passos</th>
-              <th>Ação</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for estado in session['estados'] %}
+      <form action="" method="post">      
+        <div class="row d-flex align-items-center">        
+          <div class="col mb-3">
+            <div class="card">
+              {% if balde1.quantidade == 1 %}
+              <img src="{{ url_for('static', filename='img/balde_4_1.jpg') }}" class="card-img-top"
+                alt="Balde de 3 litros">
+              {% elif balde1.quantidade == 2 %}
+              <img src="{{ url_for('static', filename='img/balde_4_2.jpg') }}" class="card-img-top"
+                alt="Balde de 3 litros">
+              {% elif balde1.quantidade == 3 %}
+              <img src="{{ url_for('static', filename='img/balde_4_3.jpg') }}" class="card-img-top"
+                alt="Balde de 3 litros">
+              {% elif balde1.quantidade == 4 %}
+              <img src="{{ url_for('static', filename='img/balde_4_4.jpg') }}" class="card-img-top"
+                alt="Balde de 3 litros">
+              {% else %}
+              <img src="{{ url_for('static', filename='img/balde_4_0.jpg') }}" class="card-img-top"
+                alt="Balde de 3 litros">
+              {% endif %} 
+              
+              <div class="card-body">
+                <h5 class="card-title">Balde 1</h5>
+                <p class="card-text">Capacidade: {{ balde1.capacidade }} litros</p>
+                <p class="card-text">Conteudo: <span class="font-weight-bold">{{ balde1.quantidade }} litros</span></p>
+                <input hidden type="text" name="b1_capacidade" id="b1_capacidade" value="{{ balde1.capacidade }}">
+                <input hidden type="text" name="b1_quantidade" id="b1_quantidade" value="{{ balde1.quantidade }}">
+                <div class="row">
+                  <div class="col">
+                    {% if balde1.quantidade < balde1.capacidade %}
+                      <button type="submit" name="operacao" id="encher_b1" class="btn btn-primary btn-block"  value="encher_b1">ENCHER</button>
+                    {% else %}
+                      <button type="button" name="operacao" id="encher_b1" class="btn btn-secondary btn-block"  value="encher_b1">ENCHER</button>
+                    {% endif %}                  
+                  </div>
+                  <div class="col">
+                    {% if balde1.quantidade > 0 %}
+                      <button type="submit" name="operacao" id="esvaziar_b1" class="btn btn-primary btn-block" value="esvaziar_b1">ESVAZIAR</button>
+                    {% else %}
+                      <button type="button" name="operacao" id="esvaziar_b1" class="btn btn-secondary btn-block" value="esvaziar_b1">ESVAZIAR</button>
+                    {% endif %}
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row my-1">
+              <div class="col">
+                {% if balde1.quantidade != 0 %}
+                  <button type="submit" name="operacao" id="b1_to_b2" class="btn btn-primary btn-lg btn-block" value="b1_to_b2">BALDE1
+                    <span class="font-weight-bold">>></span> BALDE2</button>
+                {% else %}
+                  <button type="button" name="operacao" id="b1_to_b2" class="btn btn-secondary btn-lg btn-block" value="b1_to_b2">BALDE1
+                    <span class="font-weight-bold">>></span> BALDE2</button>
+                {% endif %}
+                
+              </div>
+            </div>
+            <div class="row my-1">
+              <div class="col">
+                {% if balde2.quantidade != 0 %}
+                <button type="submit" name="operacao" id="b2_to_b1" class="btn btn-primary btn-lg btn-block" value="b2_to_b1">BALDE1 
+                  <span class="font-weight-bold"> << </span> BALDE2 </button>
+                {% else %}
+                <button type="button" name="operacao" id="b2_to_b1" class="btn btn-secondary btn-lg btn-block" value="b2_to_b1">BALDE1 
+                  <span class="font-weight-bold"> << </span> BALDE2 </button>
+                {% endif %}              
+              </div>
+            </div>
+          </div>
+          <div class="col mb-3">
+            <div class="card">
+              {% if balde2.quantidade == 1 %}
+              <img src="{{ url_for('static', filename='img/balde_4_1.jpg') }}" class="card-img-top"
+                alt="Balde de 3 litros">
+              {% elif balde2.quantidade == 2 %}
+              <img src="{{ url_for('static', filename='img/balde_4_2.jpg') }}" class="card-img-top"
+                alt="Balde de 3 litros">
+              {% elif balde2.quantidade == 3 %}
+              <img src="{{ url_for('static', filename='img/balde_4_3.jpg') }}" class="card-img-top"
+                alt="Balde de 3 litros">
+              {% else %}
+              <img src="{{ url_for('static', filename='img/balde_4_0.jpg') }}" class="card-img-top"
+                alt="Balde de 3 litros">
+              {% endif %}
+              <div class="card-body">
+                <h5 class="card-title">Balde 2</h5>
+                <p class="card-text">Capacidade: {{ balde2.capacidade }} litros</p>
+                <p class="card-text">Conteudo: <span class="font-weight-bold">{{ balde2.quantidade }} litros</span></p>
+                <input hidden type="text" name="b2_capacidade" id="b2_capacidade" value="{{ balde2.capacidade }}">
+                <input hidden type="text" name="b2_quantidade" id="b2_quantidade" value="{{ balde2.quantidade }}">
+                <div class="row">
+                  <div class="col">
+                    {% if balde2.quantidade < balde2.capacidade %}
+                      <button type="submit" name="operacao" id="encher_b2" class="btn btn-primary btn-block" value="encher_b2">ENCHER</button>
+                    {% else %}
+                      <button type="button" name="operacao" id="encher_b2" class="btn btn-secondary btn-block" value="encher_b2">ENCHER</button>
+                    {% endif %}
+                  </div>
+                  <div class="col">
+                    {% if balde2.quantidade > 0 %}
+                      <button type="submit" name="operacao" id="esvaziar_b2" class="btn btn-primary btn-block" value="esvaziar_b2">ESVAZIAR</button>
+                    {% else %}
+                      <button type="button" name="operacao" id="esvaziar_b2" class="btn btn-secondary btn-block" value="esvaziar_b2">ESVAZIAR</button>
+                    {% endif %}
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button type="submit" name="operacao" id="reset" class="btn btn-primary btn-lg btn-block" value="reset">RESET</button>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col">
+          <table class="table">
+            <thead>
               <tr>
-                <td scope="row">{{loop.index}}</td>
-                <td>{{ estado|e }}</td>
+                <th>Passos</th>
+                <th>Ação</th>
               </tr>
-            {% endfor %}
-          </tbody>
-          <thead>
-            <tr>
-              <th>Passos</th>
-              <th>Ação</th>
-            </tr>
-          </thead>
-        </table>
+            </thead>
+            <tbody>
+              {% for estado in session['estados'] %}
+                <tr>
+                  <td scope="row">{{loop.index}}</td>
+                  <td>{{ estado|e }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+            <thead>
+              <tr>
+                <th>Passos</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
       </div>
     </div>
   </div>
